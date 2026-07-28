@@ -40,7 +40,7 @@ body { background: var(--bg-gradient); color: var(--text-main); min-height: 100v
   gap: 8px; 
   font-weight: 800; 
   font-size: 1.35rem; 
-  background: linear-gradient(135deg, #2563eb, #7c3aed); 
+  background: linear-gradient(135deg, #2563eb, #10b981); 
   -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent; 
 }
