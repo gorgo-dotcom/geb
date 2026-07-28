@@ -12,7 +12,13 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding-bottom: 60px; }
+body 
+{ 
+background: var(--bg-gradient); 
+color: var(--text-main); 
+min-height: 100vh; 
+padding-bottom: 60px; 
+}
 
 .navbar-header { 
   position: sticky; 
@@ -45,7 +51,6 @@ body { background: var(--bg-gradient); color: var(--text-main); min-height: 100v
   -webkit-text-fill-color: transparent; 
 }
 
-/* მობილურისთვის ადაპტირებული ჰორიზონტალურად სქროლვადი ტაბები */
 .tabs-wrapper { 
   display: flex; 
   background: #f1f5f9; 
@@ -126,3 +131,33 @@ body { background: var(--bg-gradient); color: var(--text-main); min-height: 100v
 
 .toast-notice { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0f172a; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 0.88rem; transition: transform 0.3s; z-index: 1000; }
 .toast-notice.show { transform: translateX(-50%) translateY(0); }
+.scroll-top-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 50%; 
+  transform: translateX(-50%);
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #2563eb, #10b981);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+.scroll-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+}
+.scroll-top-btn:hover {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
