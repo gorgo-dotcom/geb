@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Pulse & Insights - საინტერესო ფაქტები, რჩევები და ციტატები</title>
+  <meta name="description" content="ყოველდღიური საინტერესო ფაქტები ისტორიიდან, ლაივჰაკები, ფსიქოლოგიური ფაქტები, ავტო რჩევები, დღის კითხვები, ხუმრობები და ციტატები.">
+  <meta name="keywords" content="ისტორიული ფაქტები, ლაივჰაკები, ფსიქოლოგია, ავტო რჩევები, დღის ციტატა, დღის ხუმრობა">
+  <!-- დინამიური Open Graph ტეგები -->
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Daily Pulse">
+	<meta property="og:description" content="საინტერესო ფაქტები და რჩევები">
+	<meta property="og:image" id="ogImage" content="https://picsum.photos/600/400">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+
+  <link rel="canonical" href="https://example.com/" id="canonicalUrl">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Daily Pulse & Insights">
+  <meta property="og:description" content="ყოველდღიური საინტერესო ფაქტები, რჩევები, ხუმრობები და ციტატები.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="navbar-header">
+    <div class="header-content">
+      <div class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">DailyPulse</span>
+      </div>
+      
+      <!-- ტაბების ნავიგაცია -->
+      <nav class="tabs-wrapper">
+        <button class="tab-btn active" data-category="All"><span>ყველა</span></button>
+        <button class="tab-btn" data-category="ფაქტი ისტორიიდან"><span>ისტორია</span></button>
+        <button class="tab-btn" data-category="ლაივჰაკი"><span>ლაივჰაკი</span></button>
+        <button class="tab-btn" data-category="ფსიქოლოგიური ფაქტი"><span>ფსიქოლოგია</span></button>
+        <button class="tab-btn" data-category="ავტო რჩევა"><span>ავტო რჩევა</span></button>
+        <button class="tab-btn" data-category="დღის კითხვა"><span>კითხვა</span></button>
+        <button class="tab-btn" data-category="დღის ხუმრობა"><span>ხუმრობა</span></button>
+        <button class="tab-btn" data-category="დღის ციტატა"><span>ციტატა</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-layout">
+    <div id="postsFeed" class="feed-grid"></div>
+  </main>
+
+  <script src="posts.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
