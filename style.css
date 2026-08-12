@@ -161,3 +161,20 @@ padding-bottom: 60px;
   transform: translateX(-50%) translateY(-3px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
+.post-media-no-image {
+  height: 120px;
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+}
+.post-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.post-source {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+.post-source:hover {
+  text-decoration: underline;
+}
