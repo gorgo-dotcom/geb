@@ -112,7 +112,7 @@ padding-bottom: 60px;
 .post-category-tag[data-type="ხუმრობა"] { background: linear-gradient(135deg, #db2777, #f43f5e); }
 .post-category-tag[data-type="ციტატა"] { background: linear-gradient(135deg, #475569, #334155); }
 
-.post-body { padding: 18px 8px 0 8px; }
+.post-body { padding: 18px 8px 0 8px; text-align:justify; }
 .post-text { font-size: 1.05rem; line-height: 1.6; color: var(--text-main); font-weight: 500; margin-bottom: 16px; }
 .post-meta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 14px; font-size: 0.82rem; color: var(--text-muted); }
 
