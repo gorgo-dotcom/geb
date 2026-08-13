@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetId = hash.substring(1);
     const targetPost = posts.find(post => post.id === targetId);
 
-    if (!targetPost) return;
+    if (!targetPost) { history.replaceState(null, "", window.location.pathname); initCategory("All"); return;}
 
     if (currentCategory !== "All" && targetPost.category !== currentCategory) {
       tabButtons.forEach(button => button.classList.remove("active"));
