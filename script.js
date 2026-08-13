@@ -144,32 +144,37 @@ document.addEventListener("DOMContentLoaded", () => {
 	  return posts.filter(post =>
 		type === "All" || post.type == type
 	  );
-	}
-
-  function renderNextBatch() {
-    if (isLoading) return;
-
-    const start = (currentPage - 1) * PAGE_SIZE;
-    const end = currentPage * PAGE_SIZE;
-    const batch = filteredPosts.slice(start, end);
-
-    if (batch.length === 0) return;
-
-    isLoading = true;
-
-    if (loader.parentNode) loader.remove();
-
-    batch.forEach(post => {
-      postsFeed.appendChild(createPostCard(post));
-    });
-
-    currentPage++;
-    isLoading = false;
-
-    if (end < filteredPosts.length) {
-      postsFeed.appendChild(loader);
     }
-  }
+
+    function renderNextBatch() {
+        if (isLoading) return;
+
+        const start = (currentPage - 1) * PAGE_SIZE;
+        const end = currentPage * PAGE_SIZE;
+        const batch = filteredPosts.slice(start, end);
+
+        if (batch.length === 0) {
+            if (loader.parentNode) loader.remove();
+            return;
+        }
+
+        isLoading = true;
+
+        if (loader.parentNode) {
+            loader.remove();
+        }
+
+        batch.forEach(post => {
+            postsFeed.appendChild(createPostCard(post));
+        });
+
+        currentPage++;
+        isLoading = false;
+
+        if (end < filteredPosts.length) {
+            postsFeed.appendChild(loader);
+    }
+}
 
   function initCategory(category = "All") {
     currentCategory = category;
@@ -186,17 +191,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     renderNextBatch();
-  }
-
-  window.addEventListener("scroll", () => {
-    if (isLoading) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-    if (scrollTop + clientHeight >= scrollHeight - 300) {
-      renderNextBatch();
     }
-  });
+
+    window.addEventListener("scroll", () => {
+        if (isLoading) return;
+
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+        if (scrollTop + clientHeight >= scrollHeight - 300) {
+            renderNextBatch();
+    }
+});
 
   function scrollToHashPost() {
     const hash = window.location.hash;
