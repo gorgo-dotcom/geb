@@ -125,32 +125,6 @@ padding-bottom: 60px;
 .share-btn.tg:hover { background: #229ed9; color: #fff; }
 .share-btn.copy:hover { background: #2563eb; color: #fff; }
 
-.share-btn.speech {
-position: relative;
-}
-.share-btn.speech .speech-icon-stop {
-display: none;
-}
-.share-btn.speech.active {
-background: #2563eb;
-color: #fff;
-}
-.share-btn.speech.active .speech-icon-play {
-    display: none;
-}
-.share-btn.speech.active .speech-icon-stop {
-    display: block;
-}
-.share-btn.speech svg {
-width: 15px;
-height: 15px;
-fill: currentColor;
-}
-.post-card.speaking {
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.20), var(--shadow-md);
-}
-
-
 .feed-loader { display: flex; justify-content: center; padding: 20px; }
 .spinner { width: 30px; height: 30px; border: 3px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
