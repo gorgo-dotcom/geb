@@ -32,7 +32,7 @@ padding-bottom: 60px;
 }
 
 .header-content { 
-  max-width: 720px; 
+  max-width: 635px; 
   margin: 0 auto; 
   display: flex; 
   flex-direction: column; 
@@ -109,7 +109,6 @@ padding-bottom: 60px;
 .post-category-tag[data-type="ფსიქოლოგია"] { background: linear-gradient(135deg, #7c3aed, #9333ea); }
 .post-category-tag[data-type="ავტომობილები"] { background: linear-gradient(135deg, #dc2626, #ef4444); }
 .post-category-tag[data-type="ციტატა"] { background: linear-gradient(135deg, #0284c7, #2563eb); }
-.post-category-tag[data-type="ხუმრობა"] { background: linear-gradient(135deg, #db2777, #f43f5e); }
 .post-category-tag[data-type="ციტატა"] { background: linear-gradient(135deg, #475569, #334155); }
 
 .post-body { padding: 18px 8px 0 8px; text-align:justify; }
