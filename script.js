@@ -97,7 +97,7 @@ let currentUtterance = null;
     const mediaHTML = imageUrl
       ? `
         <div class="post-media">
-          <img src="${imageUrl}" alt="${post.category} - ${post.content.substring(0, 30)}" itemprop="image" loading="lazy">
+          <img src="${imageUrl}" alt="${post.category} - ${post.content.substring(0, 30)}" itemprop="image" loading="lazy" onerror="this.onerror=null; this.src='empty.png';">
           <span class="post-category-tag" data-type="${post.category}" itemprop="articleSection">${post.category}</span>
         </div>
       `
