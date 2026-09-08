@@ -107,8 +107,7 @@ let currentUtterance = null;
         </div>
       `;
 
-       const dateHTML = post.type == 10 && post.createdDate ? `<span class="post-date">📅 <time itemprop="datePublished" datetime="${post.createdDate}">${post.createdDate}</time></span>`: "";
-
+       const dateHTML = ""; 
        const sourceHTML = post.sourceUrl
           ? `<a href="${post.sourceUrl}" target="_blank" rel="noopener noreferrer" class="post-source">წყარო</a>`: "";
 
