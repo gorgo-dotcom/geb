@@ -1,6 +1,82 @@
+// Set window.GEB_API_BASE_URL before loading this script when the API is hosted
+// on another origin. Leave it empty when the API is served through this origin.
+const GEB_API_BASE_URL = (window.GEB_API_BASE_URL || "").replace(/\/+$/, "");
+
+function getLikeClientID() {
+  const storageKey = "geb-like-client-id";
+  let clientID = localStorage.getItem(storageKey);
+
+  if (!clientID) {
+    clientID = crypto.randomUUID();
+    localStorage.setItem(storageKey, clientID);
+  }
+
+  return clientID;
+}
+
+async function plk(postID, clientID, liked) {
+  const numericPostID = Number(postID);
+  if (!Number.isSafeInteger(numericPostID) || numericPostID <= 0) {
+    throw new Error("This post has no database ID yet. Regenerate posts.js from the CMS.");
+  }
+
+  const response = await fetch(`${GEB_API_BASE_URL}/api/DBManager/likes/set`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ PostID: numericPostID, ClientID: clientID, Liked: liked })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Like request failed (${response.status}).`);
+  }
+
+  return response.json();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const postsFeed = document.getElementById("postsFeed");
   const tabButtons = document.querySelectorAll(".tab-btn");
+
+  const imageViewer = document.createElement("div");
+  imageViewer.className = "image-viewer";
+  imageViewer.hidden = true;
+  imageViewer.setAttribute("role", "dialog");
+  imageViewer.setAttribute("aria-modal", "true");
+  imageViewer.setAttribute("aria-label", "სურათის გადიდებული ხედი");
+  imageViewer.innerHTML = `
+    <div class="image-viewer-frame">
+      <button class="image-viewer-close" type="button" aria-label="დახურვა" title="დახურვა">×</button>
+      <img class="image-viewer-image" alt="">
+    </div>
+  `;
+  document.body.appendChild(imageViewer);
+  const viewerImage = imageViewer.querySelector(".image-viewer-image");
+
+  function closeImageViewer() {
+    imageViewer.hidden = true;
+    viewerImage.removeAttribute("src");
+    document.body.classList.remove("image-viewer-open");
+  }
+
+  postsFeed.addEventListener("click", (event) => {
+    const image = event.target.closest(".post-media img");
+    if (!image) return;
+
+    viewerImage.src = image.currentSrc || image.src;
+    viewerImage.alt = image.alt;
+    imageViewer.hidden = false;
+    document.body.classList.add("image-viewer-open");
+  });
+
+  imageViewer.addEventListener("click", (event) => {
+    if (event.target === imageViewer || event.target === viewerImage || event.target.closest(".image-viewer-close")) {
+      closeImageViewer();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !imageViewer.hidden) closeImageViewer();
+  });
 
 const PAGE_SIZE = 15;
 let currentCategory = "All";
@@ -107,7 +183,8 @@ let currentUtterance = null;
         </div>
       `;
 
-       const dateHTML = ""; 
+      const dateHTML = "";// post.type == 10 && post.createdDate ? `<span class="post-date">📅 <time itemprop="datePublished" datetime="${post.createdDate}">${post.createdDate}</time></span>`: "";
+
        const sourceHTML = post.sourceUrl
           ? `<a href="${post.sourceUrl}" target="_blank" rel="noopener noreferrer" class="post-source">წყარო</a>`: "";
 
@@ -120,13 +197,19 @@ let currentUtterance = null;
             ${dateHTML}
             ${sourceHTML}
           </div>
-          <div class="post-share">
+          <div class="post-actions">
+            <button class="like-btn" type="button" data-id="${post.id}" aria-label="მოწონება: 0" aria-pressed="false" title="მოწონება">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count" aria-hidden="true">0</span>
+            </button>
+            <div class="post-share">
             <a href="https://www.facebook.com/sharer/sharer.php?u=${shareURL}" target="_blank" rel="noopener noreferrer" class="share-btn fb" title="Facebook-ზე გაზიარება">
               <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
             <button class="share-btn copy" data-id="${post.id}" title="ლინკის დაკოპირება">
               <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1-.9 2-2-2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
             </button>
+            </div>
           </div>
         </div>
       </div>
@@ -137,6 +220,25 @@ let currentUtterance = null;
       navigator.clipboard.writeText(getPostURL(post.id)).then(() => {
         showToast("ლინკი დაკოპირებულია ბუფერში!");
       });
+    });
+
+    card.querySelector(".like-btn").addEventListener("click", async (e) => {
+      const button = e.currentTarget;
+      const liked = button.getAttribute("aria-pressed") !== "true";
+      button.disabled = true;
+
+      try {
+        const result = await plk(post.id, getLikeClientID(), liked);
+        button.setAttribute("aria-pressed", String(result.liked));
+        const count = button.querySelector(".like-count").textContent;
+        button.setAttribute("aria-label", `მოწონება: ${count}`);
+        button.title = `მოწონება: ${count}`;
+      } catch (error) {
+        console.error("Unable to update like:", error);
+        showToast("მოწონების შენახვა ვერ მოხერხდა. სცადეთ მოგვიანებით.");
+      } finally {
+        button.disabled = false;
+      }
     });
 
     return card;
