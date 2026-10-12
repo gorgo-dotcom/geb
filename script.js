@@ -1,6 +1,6 @@
-// Set window.GEB_API_BASE_URL before loading this script when the API is hosted
-// on another origin. Leave it empty when the API is served through this origin.
-const GEB_API_BASE_URL = (window.GEB_API_BASE_URL || "").replace(/\/+$/, "");
+const GEB_API_BASE_URL = (
+  window.GEB_API_BASE_URL || "http://95.104.57.119:8085"
+).replace(/\/+$/, "");
 
 function getLikeClientID() {
   const storageKey = "geb-like-client-id";
