@@ -104,6 +104,7 @@ width: 100%;
 height: 100%;
 display: block;
 object-fit: cover;
+cursor: zoom-in;
 }
 .post-category-tag {
     position: absolute;
@@ -132,6 +133,7 @@ object-fit: cover;
 .post-body { padding: 18px 8px 0 8px; text-align:justify; }
 .post-text { font-size: 1.05rem; line-height: 1.6; color: var(--text-main); font-weight: 500; margin-bottom: 16px; }
 .post-meta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 14px; font-size: 0.82rem; color: var(--text-muted); }
+.post-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-left: auto; }
 .post-share { display: flex; align-items: center; gap: 8px; }
 .share-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #f1f5f9; color: #475569; border: none; cursor: pointer; transition: all 0.2s; }
 .share-btn svg { width: 15px; height: 15px; fill: currentColor; }
@@ -140,6 +142,13 @@ object-fit: cover;
 .share-btn.tw:hover { background: #000000; color: #fff; }
 .share-btn.tg:hover { background: #229ed9; color: #fff; }
 .share-btn.copy:hover { background: #2563eb; color: #fff; }
+.like-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 9px; border: none; border-radius: 18px; background: #f1f5f9; color: #64748b; cursor: pointer; font-size: 0.82rem; font-weight: 700; transition: all 0.2s; }
+.like-btn:hover { transform: translateY(-2px); }
+.like-btn:hover, .like-btn[aria-pressed="true"] { background: #fee2e2; color: #e11d48; }
+.like-count { min-width: 0.6em; text-align: center; }
+.like-btn svg { display: block; width: 15px; height: 15px; flex: 0 0 15px; fill: currentColor; }
+.like-btn[aria-pressed="true"] svg { transform: scale(1.08); }
+.like-btn svg { transition: transform 0.2s ease; }
 .feed-loader { display: flex; justify-content: center; padding: 20px; }
 .spinner { width: 30px; height: 30px; border: 3px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -192,6 +201,63 @@ font-weight: 600;
 .post-source:hover {
 text-decoration: underline;
 }
+.image-viewer[hidden] { display: none; }
+.image-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: rgba(8, 15, 30, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: viewer-fade-in 0.2s ease-out;
+    cursor: zoom-out;
+}
+.image-viewer-frame {
+    position: relative;
+    max-width: min(96vw, 1500px);
+    max-height: 94vh;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(226,232,240,0.92));
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.12);
+    cursor: default;
+    animation: viewer-pop-in 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.image-viewer-image {
+    display: block;
+    max-width: calc(96vw - 84px);
+    max-height: calc(94vh - 84px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    cursor: zoom-out;
+}
+.image-viewer-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    z-index: 1;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255,255,255,0.85);
+    border-radius: 50%;
+    background: #fff;
+    color: #334155;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+.image-viewer-close:hover { background: #f1f5f9; color: #0f172a; }
+body.image-viewer-open { overflow: hidden; }
+@keyframes viewer-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes viewer-pop-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 .site-footer {
 margin-top: 60px;
 padding: 30px 20px;
@@ -224,4 +290,7 @@ opacity: 0.55;
         background-position: center center;
         background-size: cover;
     }
+    .image-viewer { padding: 16px; }
+    .image-viewer-frame { max-width: 98vw; padding: 7px; border-radius: 14px; }
+    .image-viewer-image { max-width: calc(98vw - 46px); max-height: calc(92vh - 50px); }
 }
