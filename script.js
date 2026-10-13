@@ -36,6 +36,8 @@ async function plk(postID, clientID, liked) {
 document.addEventListener("DOMContentLoaded", () => {
   const postsFeed = document.getElementById("postsFeed");
   const tabButtons = document.querySelectorAll(".tab-btn");
+  const postSearchInput = document.getElementById("postSearchInput");
+  const postSearchClear = document.getElementById("postSearchClear");
   const readingProgress = document.querySelector(".reading-progress");
   const readingProgressFill = readingProgress.querySelector(".reading-progress-fill");
 
@@ -256,9 +258,15 @@ let currentUtterance = null;
   }
 
   	function getFilteredPosts(type) {
-	  return posts.filter(post =>
-		type === "All" || post.type == type
-	  );
+	  const query = postSearchInput.value.trim().toLocaleLowerCase();
+	  return posts.filter(post => {
+		const matchesCategory = type === "All" || post.type == type;
+		const searchableText = [post.content, post.category, post.sourceUrl]
+		  .filter(Boolean)
+		  .join(" ")
+		  .toLocaleLowerCase();
+		return matchesCategory && (!query || searchableText.includes(query));
+	  });
     }
 
     function updateReadingProgress() {
@@ -343,7 +351,7 @@ let currentUtterance = null;
     updateStructuredData(filteredPosts);
 
     if (filteredPosts.length === 0) {
-      postsFeed.innerHTML = `<p style="text-align:center; padding:40px; color:#64748b;">ამ კატეგორიაში პოსტები არ არის.</p>`;
+      postsFeed.innerHTML = `<p style="text-align:center; padding:40px; color:#64748b;">${postSearchInput.value.trim() ? "ამ ძიებით პოსტები ვერ მოიძებნა." : "ამ კატეგორიაში პოსტები არ არის."}</p>`;
       return;
     }
 
@@ -413,6 +421,21 @@ let currentUtterance = null;
       button.classList.add("active");
       initCategory(button.getAttribute("data-type"));
     });
+  });
+
+  postSearchInput.addEventListener("input", () => {
+    postSearchClear.hidden = postSearchInput.value.length === 0;
+    tabButtons.forEach(button => {
+      button.classList.toggle("active", button.getAttribute("data-type") === "All");
+    });
+    initCategory("All");
+  });
+
+  postSearchClear.addEventListener("click", () => {
+    postSearchInput.value = "";
+    postSearchClear.hidden = true;
+    postSearchInput.focus();
+    initCategory(currentCategory);
   });
 
   initCategory("All");

@@ -40,16 +40,23 @@ gtag('config', 'G-T3CFCYM4LY');
 				<span class="logo-icon">✨</span>
 			</div>
 
-			<nav class="tabs-wrapper">
-				<button class="tab-btn active" data-type="All"><span>ყველა</span></button>
-				<button class="tab-btn" data-type="10"><span>ისტორია</span></button>
-				<button class="tab-btn" data-type="20"><span>ლაივჰაკი</span></button>
-				<button class="tab-btn" data-type="30"><span>ფსიქოლოგია</span></button>
-				<button class="tab-btn" data-type="40"><span>ავტო რჩევა</span></button>
-				<button class="tab-btn" data-type="50"><span>ციტატა</span></button>
-			</nav>
-			<div class="reading-progress" role="progressbar" aria-label="პოსტების დათვალიერების პროგრესი" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-				<div class="reading-progress-fill"></div>
+			<div class="menu-controls">
+				<nav class="tabs-wrapper">
+					<button class="tab-btn active" data-type="All"><span>ყველა</span></button>
+					<button class="tab-btn" data-type="10"><span>ისტორია</span></button>
+					<button class="tab-btn" data-type="20"><span>ლაივჰაკი</span></button>
+					<button class="tab-btn" data-type="30"><span>ფსიქოლოგია</span></button>
+					<button class="tab-btn" data-type="40"><span>ავტო რჩევა</span></button>
+					<button class="tab-btn" data-type="50"><span>ციტატა</span></button>
+				</nav>
+				<div class="post-search">
+					<svg class="post-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+					<input id="postSearchInput" type="search" placeholder="search post here" aria-label="Search posts">
+					<button id="postSearchClear" class="post-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>×</button>
+				</div>
+				<div class="reading-progress" role="progressbar" aria-label="პოსტების დათვალიერების პროგრესი" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+					<div class="reading-progress-fill"></div>
+				</div>
 			</div>
 		</div>
 	</header>
