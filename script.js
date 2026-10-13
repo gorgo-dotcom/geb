@@ -36,6 +36,8 @@ async function plk(postID, clientID, liked) {
 document.addEventListener("DOMContentLoaded", () => {
   const postsFeed = document.getElementById("postsFeed");
   const tabButtons = document.querySelectorAll(".tab-btn");
+  const readingProgress = document.querySelector(".reading-progress");
+  const readingProgressFill = readingProgress.querySelector(".reading-progress-fill");
 
   const imageViewer = document.createElement("div");
   imageViewer.className = "image-viewer";
@@ -259,6 +261,44 @@ let currentUtterance = null;
 	  );
     }
 
+    function updateReadingProgress() {
+      const totalPosts = filteredPosts.length;
+      let percent = 0;
+
+      if (totalPosts > 0 && window.scrollY > 0) {
+        const headerBottom = document.querySelector(".navbar-header").getBoundingClientRect().bottom;
+        const cards = postsFeed.querySelectorAll(".post-card[data-post-index]");
+        let activeCard = null;
+
+        const lastCard = cards[cards.length - 1];
+        if (lastCard && Number(lastCard.dataset.postIndex) === totalPosts) {
+          const lastRect = lastCard.getBoundingClientRect();
+          if (lastRect.bottom > headerBottom && lastRect.top < window.innerHeight) {
+            percent = 100;
+          }
+        }
+
+        if (percent < 100) {
+          for (const card of cards) {
+            if (card.getBoundingClientRect().bottom > headerBottom + 1) {
+              activeCard = card;
+              break;
+            }
+          }
+
+          if (activeCard) {
+            percent = Number(activeCard.dataset.postIndex) / totalPosts * 100;
+          } else if (currentPage > 1) {
+            percent = Math.min(100, (currentPage - 1) * PAGE_SIZE / totalPosts * 100);
+          }
+        }
+      }
+
+      percent = Math.max(0, Math.min(100, percent));
+      readingProgressFill.style.width = `${percent}%`;
+      readingProgress.setAttribute("aria-valuenow", String(Math.round(percent)));
+    }
+
     function renderNextBatch() {
         if (isLoading) return;
 
@@ -277,8 +317,10 @@ let currentUtterance = null;
             loader.remove();
         }
 
-        batch.forEach(post => {
-            postsFeed.appendChild(createPostCard(post));
+        batch.forEach((post, index) => {
+            const card = createPostCard(post);
+            card.dataset.postIndex = String(start + index + 1);
+            postsFeed.appendChild(card);
         });
 
         currentPage++;
@@ -287,6 +329,7 @@ let currentUtterance = null;
         if (end < filteredPosts.length) {
             postsFeed.appendChild(loader);
     }
+        updateReadingProgress();
 }
 
   function initCategory(category = "All") {
@@ -294,6 +337,7 @@ let currentUtterance = null;
     currentPage = 1;
     postsFeed.innerHTML = "";
     filteredPosts = getFilteredPosts(category);
+    updateReadingProgress();
 
     updateMetaForSeo(category);
     updateStructuredData(filteredPosts);
@@ -307,6 +351,7 @@ let currentUtterance = null;
     }
 
     window.addEventListener("scroll", () => {
+        updateReadingProgress();
         if (isLoading) return;
 
         const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
