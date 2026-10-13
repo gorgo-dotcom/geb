@@ -1,5 +1,3 @@
-// Override window.GEB_API_BASE_URL before loading this script when deploying to
-// another API host. The production API is used by default.
 const GEB_API_BASE_URL = (
   window.GEB_API_BASE_URL || "https://api.geb.ge"
 ).replace(/\/+$/, "");
