@@ -1,5 +1,5 @@
 const GEB_API_BASE_URL = (
-  window.GEB_API_BASE_URL || "http://95.104.57.119:8085"
+  window.GEB_API_BASE_URL || "https://api.geb.ge"
 ).replace(/\/+$/, "");
 
 function getLikeClientID() {
