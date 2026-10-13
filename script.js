@@ -90,6 +90,7 @@ let filteredPosts = [];
 let speechEnabled = false;
 let currentSpeechCard = null;
 let currentUtterance = null;
+let priorityImagePostID = null;
 
   // Add an internal ID without changing the data stored in posts.js.
   posts.forEach((post, index) => {
@@ -110,6 +111,44 @@ let currentUtterance = null;
     const baseURL = window.location.origin + window.location.pathname;
     return `${baseURL}#${postId}`;
   }
+
+  function prioritizePostImage(post) {
+    if (!post) return;
+
+    priorityImagePostID = String(post.id);
+    const imageUrl = post.imageUrl || `https://picsum.photos/600/400?random=${post.id}`;
+    let preload = document.getElementById("priorityPostImagePreload");
+
+    if (!preload) {
+      preload = document.createElement("link");
+      preload.id = "priorityPostImagePreload";
+      preload.rel = "preload";
+      preload.as = "image";
+      preload.fetchPriority = "high";
+      document.head.appendChild(preload);
+    }
+
+    preload.href = new URL(imageUrl, document.baseURI).href;
+
+    const targetImage = document.getElementById(priorityImagePostID)?.querySelector(".post-media img");
+    if (targetImage) {
+      targetImage.fetchPriority = "high";
+      targetImage.loading = "eager";
+    }
+  }
+
+  function prioritizeImageFromCurrentHash() {
+    const rawID = window.location.hash.slice(1);
+    if (!rawID) return;
+
+    let postID = rawID;
+    try { postID = decodeURIComponent(rawID); } catch { /* Keep the raw fragment. */ }
+    const targetPost = posts.find(post => String(post.id) === postID);
+    if (targetPost) prioritizePostImage(targetPost);
+  }
+
+  // Start downloading a directly linked post's image before rendering earlier batches.
+  prioritizeImageFromCurrentHash();
 
   const loader = document.createElement("div");
   loader.className = "feed-loader";
@@ -173,11 +212,12 @@ let currentUtterance = null;
     );
 
 	const imageUrl = post.imageUrl || `https://picsum.photos/600/400?random=${post.id}`;
+    const isPriorityImage = String(post.id) === priorityImagePostID;
 
     const mediaHTML = imageUrl
       ? `
         <div class="post-media">
-          <img src="${imageUrl}" alt="${post.category} - ${post.content.substring(0, 30)}" itemprop="image" loading="lazy" onerror="this.onerror=null; this.src='empty.png';">
+          <img src="${imageUrl}" alt="${post.category} - ${post.content.substring(0, 30)}" itemprop="image" loading="${isPriorityImage ? "eager" : "lazy"}" fetchpriority="${isPriorityImage ? "high" : "auto"}" onerror="this.onerror=null; this.src='empty.png';">
           <span class="post-category-tag" data-type="${post.category}" itemprop="articleSection">${post.category}</span>
         </div>
       `
@@ -374,10 +414,13 @@ let currentUtterance = null;
 
     if (!hash) return;
 
-    const targetId = hash.substring(1);
+    let targetId = hash.substring(1);
+    try { targetId = decodeURIComponent(targetId); } catch { /* Keep the raw fragment. */ }
     const targetPost = posts.find(post => String(post.id) === targetId);
 
     if (!targetPost) { history.replaceState(null, "", window.location.pathname); initCategory("All"); return;}
+
+    prioritizePostImage(targetPost);
 
     if (currentCategory !== "All" && targetPost.category !== currentCategory) {
       tabButtons.forEach(button => button.classList.remove("active"));
