@@ -93,7 +93,7 @@ let currentUtterance = null;
 
   // Add an internal ID without changing the data stored in posts.js.
   posts.forEach((post, index) => {
-    post.id = post.id || `post-${index + 1}`;
+    post.id = String(post.id || `post-${index + 1}`);
   });
 
   const toast = document.createElement("div");
@@ -375,7 +375,7 @@ let currentUtterance = null;
     if (!hash) return;
 
     const targetId = hash.substring(1);
-    const targetPost = posts.find(post => post.id === targetId);
+    const targetPost = posts.find(post => String(post.id) === targetId);
 
     if (!targetPost) { history.replaceState(null, "", window.location.pathname); initCategory("All"); return;}
 
@@ -391,7 +391,7 @@ let currentUtterance = null;
       initCategory("All");
     }
 
-    const postIndex = filteredPosts.findIndex(post => post.id === targetId);
+    const postIndex = filteredPosts.findIndex(post => String(post.id) === targetId);
 
     if (postIndex !== -1) {
       const requiredPage = Math.ceil((postIndex + 1) / PAGE_SIZE);
