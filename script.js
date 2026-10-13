@@ -1,3 +1,5 @@
+// Override window.GEB_API_BASE_URL before loading this script when deploying to
+// another API host. The production API is used by default.
 const GEB_API_BASE_URL = (
   window.GEB_API_BASE_URL || "https://api.geb.ge"
 ).replace(/\/+$/, "");
@@ -225,15 +227,24 @@ let currentUtterance = null;
     card.querySelector(".like-btn").addEventListener("click", async (e) => {
       const button = e.currentTarget;
       const liked = button.getAttribute("aria-pressed") !== "true";
+      const countElement = button.querySelector(".like-count");
+      const previousCount = Number.parseInt(countElement.textContent, 10) || 0;
+      const nextCount = Math.max(0, previousCount + (liked ? 1 : -1));
+
       button.disabled = true;
+      button.setAttribute("aria-pressed", String(liked));
+      countElement.textContent = String(nextCount);
+      button.setAttribute("aria-label", `მოწონება: ${nextCount}`);
+      button.title = `მოწონება: ${nextCount}`;
 
       try {
         const result = await plk(post.id, getLikeClientID(), liked);
         button.setAttribute("aria-pressed", String(result.liked));
-        const count = button.querySelector(".like-count").textContent;
-        button.setAttribute("aria-label", `მოწონება: ${count}`);
-        button.title = `მოწონება: ${count}`;
       } catch (error) {
+        button.setAttribute("aria-pressed", String(!liked));
+        countElement.textContent = String(previousCount);
+        button.setAttribute("aria-label", `მოწონება: ${previousCount}`);
+        button.title = `მოწონება: ${previousCount}`;
         console.error("Unable to update like:", error);
         showToast("მოწონების შენახვა ვერ მოხერხდა. სცადეთ მოგვიანებით.");
       } finally {
