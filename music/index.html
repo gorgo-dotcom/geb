@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111b">
+  <meta name="description" content="GEB Audio — a focused listening room for the GEB music library.">
+  <title>GEB Audio — Listening Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="player.css?v=gif-artwork1">
+  <script src="player.js?v=gif-artwork1" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="GEB Audio home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-name">GEB<span> AUDIO</span></span>
+      </a>
+      <div class="topbar-center"><span class="live-dot"></span> LISTENING ROOM <span class="topbar-divider">/</span> <span id="libraryStatus">LOADING LIBRARY</span></div>
+      <div class="topbar-right"><span class="headphone-icon" aria-hidden="true">◖</span><span>PERSONAL AUDIO SYSTEM</span></div>
+    </header>
+
+    <main class="studio">
+      <section class="player-deck panel" aria-labelledby="nowPlayingHeading">
+        <div class="deck-topline">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> NOW PLAYING</p>
+            <h1 id="nowPlayingHeading">Your listening room</h1>
+          </div>
+          <div class="deck-indicators"><span class="indicator led"></span><span id="playStateLabel">STANDBY</span><span class="indicator-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+        </div>
+
+        <div class="artwork-stage" id="artworkStage" data-art="ambient">
+          <div class="artwork-glow"></div>
+          <img id="coverArt" class="cover-art" src="arts/ambient.svg" alt="Ambient category cover art">
+          <div class="artwork-grain"></div>
+          <canvas id="visualizer" aria-hidden="true"></canvas>
+          <div class="artwork-topline"><span id="artCategory" class="art-category">GEB AUDIO</span><span class="art-index">SIDE A <b>•</b> 001</span></div>
+          <div class="artwork-center" aria-hidden="true">
+            <div class="record-disc"><div class="record-groove groove-one"></div><div class="record-groove groove-two"></div><div class="record-label"><span>GEB</span><small>LISTENING ROOM</small></div></div>
+          </div>
+          <div class="artwork-bottomline"><span id="artMood">A LITTLE SPACE TO LISTEN</span><span class="art-signal"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+        </div>
+
+        <div class="track-information">
+          <div class="track-copy">
+            <p id="trackArtist" class="track-artist">GEB MUSIC LIBRARY</p>
+            <h2 id="trackTitle">Choose a track</h2>
+            <p id="trackAlbum" class="track-album">Select a category to begin</p>
+          </div>
+          <button id="favoriteButton" class="icon-button favorite-button" type="button" aria-label="Add current track to favorites" aria-pressed="false" title="Favorite track">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.2 4.8 13.4a4.6 4.6 0 0 1 6.5-6.5L12 7.6l.7-.7a4.6 4.6 0 0 1 6.5 6.5L12 20.2Z"/></svg>
+          </button>
+        </div>
+
+        <div class="transport">
+          <div class="timeline-row"><span id="currentTime" class="timecode">00:00</span><input id="seekBar" class="seek-slider" type="range" min="0" max="1000" value="0" aria-label="Seek through track"><span id="duration" class="timecode">--:--</span></div>
+          <div class="transport-controls">
+            <button id="previousCategory" class="transport-button category-skip" type="button" aria-label="Previous category" title="Previous category"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M20 6 9 12l11 6V6Z"/><path d="M4 5v14"/></svg><span>CAT</span></button>
+            <button id="previousTrack" class="transport-button" type="button" aria-label="Previous track" title="Previous track (J)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M20 6 8 12l12 6V6Z"/></svg></button>
+            <button id="playPause" class="play-button" type="button" aria-label="Play" title="Play / pause (Space)"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 12 7-12 7V5Z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM15 5h4v14h-4z"/></svg></button>
+            <button id="nextTrack" class="transport-button" type="button" aria-label="Next track" title="Next track (L)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M4 6l12 6-12 6V6Z"/></svg></button>
+            <button id="nextCategory" class="transport-button category-skip" type="button" aria-label="Next category" title="Next category"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5v14M4 6l11 6-11 6V6Z"/><path d="M20 5v14"/></svg><span>CAT</span></button>
+          </div>
+          <div class="utility-controls">
+            <button id="shuffleButton" class="utility-button" type="button" aria-pressed="false" title="Shuffle (S)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3h4v4M3 7h2.5c4.3 0 8.7 10 13 10H21m-4 4h4v-4M3 17h2.5c1.3 0 2.6-1.2 3.9-2.7M14.6 9.7C16 8.2 17.3 7 18.5 7H21"/></svg><span>SHUFFLE</span></button>
+            <button id="repeatButton" class="utility-button" type="button" data-mode="off" title="Repeat: off (R)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m17 2 4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4m14-1v2a3 3 0 0 1-3 3H3"/></svg><span id="repeatLabel">REPEAT OFF</span></button>
+            <button id="speedButton" class="speed-button" type="button" title="Playback speed">1.0×</button>
+            <div class="volume-control"><button id="muteButton" class="icon-button volume-button" type="button" aria-label="Mute" title="Mute (M)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path class="volume-wave" d="M16 9a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/></svg></button><input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"></div>
+          </div>
+        </div>
+        <audio id="audioPlayer" preload="none"></audio>
+        <p id="playerMessage" class="player-message" role="status" aria-live="polite">Choose a track or press play to begin.</p>
+      </section>
+
+      <section class="library-panel panel" aria-labelledby="libraryHeading">
+        <div class="library-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span> YOUR COLLECTION</p><h2 id="libraryHeading">The library</h2></div>
+          <div class="library-total"><strong id="trackCount">—</strong><span>TRACKS</span></div>
+        </div>
+        <div id="categoryTabs" class="category-tabs" role="tablist" aria-label="Music categories"></div>
+        <label class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="trackSearch" type="search" placeholder="Find a track or artist" autocomplete="off"><button id="clearSearch" type="button" aria-label="Clear search" title="Clear search" hidden>×</button><kbd>/</kbd></label>
+        <div class="playlist-heading"><span id="playlistTitle">ALL TRACKS</span><span id="playlistCount">0 TRACKS</span></div>
+        <div id="trackList" class="track-list" role="list" aria-label="Tracks"></div>
+        <div id="emptyState" class="empty-state" hidden><span class="empty-orbit">⌕</span><strong>No tracks found</strong><span>Try another title or clear your search.</span></div>
+      </section>
+    </main>
+
+    <footer class="bottom-bar"><span><span class="footer-pulse"></span> LOCAL LIBRARY <b id="footerTrackCount">109</b> TRACKS</span><span class="keyboard-hint"><kbd>SPACE</kbd> PLAY <kbd>J</kbd>/<kbd>L</kbd> SKIP <kbd>←</kbd>/<kbd>→</kbd> SEEK</span><span>GEB AUDIO <b>•</b> 01</span></footer>
+  </div>
+<script type="application/json" id="musicLibrary">{
+  "categories": [
+    {
+      "id": "Techno-Trance",
+      "label": "Techno / Trance",
+      "artwork": "arts/techno.gif",
+      "tracks": [
+        {
+          "title": "0-MISS MON - Radio Intense 31.01.2017",
+          "path": "Techno-Trance/0-MISS MON - Radio Intense 31.01.2017.mp3",
+          "artwork": "arts/tracks/Techno-Trance-004-raster.gif",
+          "thumbnail": "arts/thumbnails/Techno-Trance-004-raster.jpg"
+        },
+        {
+          "title": "ARTBAT - Best Mix 2023 (CamelPhat - Monolink - David Guetta - Innellea, remixes) Mixed by KOCCIN",
+          "path": "Techno-Trance/ARTBAT - Best Mix 2023 (CamelPhat - Monolink - David Guetta - Innellea, remixes) Mixed by KOCCIN.mp3",
+          "artwork": "arts/tracks/Techno-Trance-008.gif",
+          "thumbnail": "arts/thumbnails/Techno-Trance-008.jpg"
+        },
+        {
+          "title": "Omiki-2026-Indian Spirit Festival 2026",
+          "path": "Techno-Trance/Omiki-2026-Indian Spirit Festival 2026.mp3",
+          "artwork": "arts/tracks/Techno-Trance-010.gif",
+          "thumbnail": "arts/thumbnails/Techno-Trance-010.jpg"
+        }
+      ]
+    },
+    {
+      "id": "Relax-Ambient-Chill-WorkMusic",
+      "label": "Ambient / Chill",
+      "artwork": "arts/ambient.gif",
+      "tracks": [
+        {
+          "title": "0-CarbonBasedLiveforms-Bests",
+          "path": "Relax-Ambient-Chill-WorkMusic/0-CarbonBasedLiveforms-Bests.mp3",
+          "artwork": "arts/tracks/Relax-Ambient-Chill-WorkMusic-001.gif",
+          "thumbnail": "arts/thumbnails/Relax-Ambient-Chill-WorkMusic-001.jpg"
+        },
+        {
+          "title": "0-Enigma - Best full album",
+          "path": "Relax-Ambient-Chill-WorkMusic/0-Enigma - Best full album.mp3",
+          "artwork": "arts/tracks/Relax-Ambient-Chill-WorkMusic-002.gif",
+          "thumbnail": "arts/thumbnails/Relax-Ambient-Chill-WorkMusic-002.jpg"
+        }
+      ]
+    },
+    {
+      "id": "TRAP",
+      "label": "Trap",
+      "artwork": "arts/trap.gif",
+      "tracks": [
+        {
+          "title": "Aero Chord - 4U",
+          "path": "TRAP/Aero Chord - 4U.mp3",
+          "artwork": "arts/tracks/TRAP-001.gif",
+          "thumbnail": "arts/thumbnails/TRAP-001.jpg"
+        },
+        {
+          "title": "Aero Chord - Boundless",
+          "path": "TRAP/Aero Chord - Boundless.mp3",
+          "artwork": "arts/tracks/TRAP-002.gif",
+          "thumbnail": "arts/thumbnails/TRAP-002.jpg"
+        },
+        {
+          "title": "Aero Chord - Mechanical Mayhem [Drumstep]",
+          "path": "TRAP/Aero Chord - Mechanical Mayhem [Drumstep].mp3",
+          "artwork": "arts/tracks/TRAP-003.gif",
+          "thumbnail": "arts/thumbnails/TRAP-003.jpg"
+        }
+      ]
+    }
+  ]
+}</script>
+</body>
+</html>
+
