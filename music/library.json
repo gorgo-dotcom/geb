@@ -51,19 +51,19 @@
       "tracks": [
         {
           "title": "Aero Chord - 4U",
-          "path": "TRAP/Aero Chord - 4U.mp3",
+          "path": "Trap/Aero Chord - 4U.mp3",
           "artwork": "arts/tracks/TRAP-001.gif",
           "thumbnail": "arts/thumbnails/TRAP-001.jpg"
         },
         {
           "title": "Aero Chord - Boundless",
-          "path": "TRAP/Aero Chord - Boundless.mp3",
+          "path": "Trap/Aero Chord - Boundless.mp3",
           "artwork": "arts/tracks/TRAP-002.gif",
           "thumbnail": "arts/thumbnails/TRAP-002.jpg"
         },
         {
           "title": "Aero Chord - Mechanical Mayhem [Drumstep]",
-          "path": "TRAP/Aero Chord - Mechanical Mayhem [Drumstep].mp3",
+          "path": "Trap/Aero Chord - Mechanical Mayhem [Drumstep].mp3",
           "artwork": "arts/tracks/TRAP-003.gif",
           "thumbnail": "arts/thumbnails/TRAP-003.jpg"
         }
