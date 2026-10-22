@@ -137,7 +137,51 @@ button,input {
 
 .headphone-icon {
   color:#719fa1;
-  font-size:16px
+  display:inline-flex;
+  align-items:center;
+  justify-content:center
+}
+
+.headphone-icon svg {
+  width:16px;
+  height:16px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+
+.main-site-link {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 10px;
+  border:1px solid #9db7ad;
+  border-radius:999px;
+  background:linear-gradient(180deg,#f4f7ee,#d7e7d3);
+  box-shadow:inset 1px 1px #fff,0 1px 2px #52685a22;
+  color:#4f786d;
+  font:700 10px 'Manrope',sans-serif;
+  letter-spacing:.04em;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background .18s ease,transform .18s ease
+}
+
+.main-site-link:hover {
+  background:linear-gradient(180deg,#fbfdf7,#c9dfca);
+  transform:translateY(-1px)
+}
+
+.main-site-link svg {
+  width:12px;
+  height:12px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round
 }
 
 .studio {
@@ -847,7 +891,7 @@ button,input {
   color:#506067;
   text-overflow:ellipsis;
   white-space:nowrap;
-  font:9px 'DM Mono',monospace
+  font:11px 'DM Mono',monospace
 }
 
 .track-category {
@@ -994,7 +1038,7 @@ button,input {
   }
 
   .headphone-icon {
-    font-size:16px
+  color:#719fa1
   }
 
   .player-deck {
@@ -1262,7 +1306,7 @@ html,body {
   }
 
   .track-name {
-    font-size:9px
+    font-size:10px
   }
 
   .bottom-bar {
