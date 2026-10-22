@@ -630,7 +630,7 @@ button,input {
 }
 
 .speed-button {
-  font-size:9px;
+  font-size:11px;
   color:#60737b;
   min-width:44px
 }
@@ -755,6 +755,8 @@ button,input {
   display:inline-flex;
   align-items:center;
   gap:5px;
+  align-self:flex-start;
+  margin-top:2px;
   white-space:nowrap
 }
 
@@ -937,7 +939,8 @@ button,input {
   color:#506067;
   text-overflow:ellipsis;
   white-space:nowrap;
-  font:11px 'DM Mono',monospace
+  font:12px 'DM Mono',monospace;
+  font-weight:400
 }
 
 .track-category {
@@ -1352,7 +1355,7 @@ html,body {
   }
 
   .track-name {
-    font-size:10px
+    font-size:11px
   }
 
   .bottom-bar {
@@ -1514,6 +1517,27 @@ button,.category-tab,.utility-button,.speed-button,.transport-button {
   color:#668a7d
 }
 
+#shuffleButton.active {
+  color:#365f9a;
+  border-color:#779ac7;
+  background:linear-gradient(180deg,#eaf2ff,#bfd1ed);
+  box-shadow:inset 1px 1px #fff,0 1px 3px #5779a044
+}
+
+#repeatButton.active[data-mode="all"] {
+  color:#3d786a;
+  border-color:#79aa9b;
+  background:linear-gradient(180deg,#e8f5e9,#b8d8c5);
+  box-shadow:inset 1px 1px #fff,0 1px 3px #4d846144
+}
+
+#repeatButton.active[data-mode="one"] {
+  color:#8a6a31;
+  border-color:#c4a75f;
+  background:linear-gradient(180deg,#fff5d9,#ead69a);
+  box-shadow:inset 1px 1px #fff,0 1px 3px #aa874044
+}
+
 #speedButton {
   color:#89774f;
   border-color:#c4b98e;
@@ -1524,6 +1548,25 @@ button,.category-tab,.utility-button,.speed-button,.transport-button {
   color:#637c95;
   border-color:#aab9bf;
   background:linear-gradient(180deg,#f0f4f5,#d5e0e3)
+}
+
+#muteButton.active {
+  color:#a65f69;
+  border-color:#c78e96;
+  background:linear-gradient(180deg,#f8eded,#e9ced1);
+  box-shadow:inset 1px 1px #fff,0 1px 2px #89555a33
+}
+
+.volume-mute-slash {
+  display:none
+}
+
+#muteButton.active .volume-wave {
+  display:none
+}
+
+#muteButton.active .volume-mute-slash {
+  display:block
 }
 
 .category-tab {
@@ -1539,7 +1582,7 @@ button,.category-tab,.utility-button,.speed-button,.transport-button {
 }
 
 .track-name {
-  font-weight:600
+  font-weight:400
 }
 
 @media(max-width:600px) {

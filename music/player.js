@@ -13,6 +13,16 @@
   // A zero saved by an earlier silent-player version should not leave playback muted.
   audio.volume = Number.isFinite(savedVolume) && savedVolume > 0 && savedVolume <= 1 ? savedVolume : 0.8;
   $('volumeSlider').value = audio.volume;
+  let lastAudibleVolume = audio.volume > 0 ? audio.volume : 0.8;
+
+  function syncMuteButton() {
+    const muted = audio.muted || audio.volume === 0;
+    $('muteButton').classList.toggle('active', muted);
+    $('muteButton').setAttribute('aria-pressed', String(muted));
+    $('muteButton').setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
+    $('muteButton').title = muted ? 'Unmute (M)' : 'Mute (M)';
+  }
+  syncMuteButton();
 
   const currentCategory = () => state.categories[state.category];
   const currentTrack = () => currentCategory()?.tracks[state.track] || null;
@@ -33,7 +43,10 @@
       const button = document.createElement('button');
       button.type = 'button'; button.className = `category-tab${!state.showFavorites && index === state.category ? ' active' : ''}`;
       button.setAttribute('role', 'tab'); button.setAttribute('aria-selected', String(!state.showFavorites && index === state.category));
-      button.textContent = `${category.label} · ${category.tracks.length}`;
+      const shortLabel = category.id === 'Techno-Trance' ? 'Techno' : category.id === 'Relax-Ambient-Chill-WorkMusic' ? 'Chill' : category.label;
+      const hintLabel = category.id === 'Techno-Trance' ? 'Techno / Trance' : category.id === 'Relax-Ambient-Chill-WorkMusic' ? 'Ambient / Downtempo / Relax / Working music' : category.label;
+      button.textContent = `${shortLabel} · ${category.tracks.length}`;
+      button.title = hintLabel;
       button.addEventListener('click', () => { state.showFavorites = false; state.category = index; state.track = category.tracks.length ? 0 : null; state.history = []; $('trackSearch').value = ''; renderCategories(); renderTracks(); if (state.track !== null) loadAndPlay(); else updateTrackInfo(); });
       container.append(button);
     });
@@ -170,11 +183,11 @@
   $('previousCategory').addEventListener('click', () => changeCategory(-1));
   $('nextCategory').addEventListener('click', () => changeCategory(1));
   $('shuffleButton').addEventListener('click', () => { state.shuffle = !state.shuffle; $('shuffleButton').classList.toggle('active', state.shuffle); $('shuffleButton').setAttribute('aria-pressed', String(state.shuffle)); });
-  $('repeatButton').addEventListener('click', () => { state.repeat = state.repeat === 'off' ? 'all' : state.repeat === 'all' ? 'one' : 'off'; $('repeatButton').dataset.mode = state.repeat; $('repeatLabel').textContent = `REPEAT ${state.repeat.toUpperCase()}`; $('repeatButton').classList.toggle('active', state.repeat !== 'off'); $('repeatButton').title = `Repeat: ${state.repeat} (R)`; });
+  $('repeatButton').addEventListener('click', () => { state.repeat = state.repeat === 'off' ? 'all' : state.repeat === 'all' ? 'one' : 'off'; $('repeatButton').dataset.mode = state.repeat; $('repeatLabel').textContent = `REPEAT ${state.repeat.toUpperCase()}`; $('repeatButton').classList.toggle('active', state.repeat !== 'off'); $('repeatButton').setAttribute('aria-pressed', String(state.repeat !== 'off')); $('repeatButton').title = `Repeat: ${state.repeat} (R)`; });
   $('speedButton').addEventListener('click', () => { const speeds = [0.75, 1, 1.25, 1.5, 2]; state.speed = speeds[(speeds.indexOf(state.speed) + 1) % speeds.length]; audio.playbackRate = state.speed; $('speedButton').textContent = `${state.speed.toFixed(2).replace(/0$/, '')}×`; });
   $('seekBar').addEventListener('input', () => { if (Number.isFinite(audio.duration)) audio.currentTime = audio.duration * Number($('seekBar').value) / 1000; });
-  $('volumeSlider').addEventListener('input', () => { audio.volume = Number($('volumeSlider').value); audio.muted = false; localStorage.setItem('geb-audio-volume', audio.volume); $('muteButton').setAttribute('aria-label', 'Mute'); });
-  $('muteButton').addEventListener('click', () => { audio.muted = !audio.muted; $('muteButton').classList.toggle('active', audio.muted); $('muteButton').setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute'); });
+  $('volumeSlider').addEventListener('input', () => { const newVolume = Number($('volumeSlider').value); if (newVolume > 0) lastAudibleVolume = newVolume; audio.volume = newVolume; audio.muted = false; localStorage.setItem('geb-audio-volume', audio.volume); syncMuteButton(); });
+  $('muteButton').addEventListener('click', () => { if (audio.muted || audio.volume === 0) { if (audio.volume === 0) { audio.volume = lastAudibleVolume; $('volumeSlider').value = audio.volume; } audio.muted = false; } else { lastAudibleVolume = audio.volume; audio.muted = true; } syncMuteButton(); });
   $('favoriteButton').addEventListener('click', () => { const track = currentTrack(); if (!track) return; if (state.favorites.has(track.path)) state.favorites.delete(track.path); else state.favorites.add(track.path); localStorage.setItem(favoritesKey, JSON.stringify([...state.favorites])); updateTrackInfo(); renderCategories(); renderTracks(); });
   $('favoritesTab').addEventListener('click', () => { state.showFavorites = !state.showFavorites; $('trackSearch').value = ''; renderCategories(); renderTracks(); });
   $('trackSearch').addEventListener('input', renderTracks);

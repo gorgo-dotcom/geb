@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="player.css?v=header-icons1">
-  <script src="player.js?v=favorites-tab2" defer></script>
+  <link rel="stylesheet" href="player.css?v=shuffle-repeat-state1">
+  <script src="player.js?v=shuffle-repeat-state1" defer></script>
 </head>
 <body>
   <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -23,7 +23,7 @@
         <span class="brand-name">GEB<span> AUDIO</span></span>
       </a>
       <div class="topbar-center"><span class="live-dot"></span> LISTENING ROOM <span class="topbar-divider">/</span> <span id="libraryStatus">LOADING LIBRARY</span></div>
-      <div class="topbar-right"><span class="headphone-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><path d="M3 13h3v7H5a2 2 0 0 1-2-2v-5Zm18 0h-3v7h1a2 2 0 0 0 2-2v-5Z"/></svg></span><span>PERSONAL AUDIO SYSTEM</span><a class="main-site-link" href="https://geb.ge/" aria-label="Go to the GEB main site">GEB.GE <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+      <div class="topbar-right"><span class="headphone-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><path d="M3 13h3v7H5a2 2 0 0 1-2-2v-5Zm18 0h-3v7h1a2 2 0 0 0 2-2v-5Z"/></svg></span><span>PERSONAL AUDIO SYSTEM</span><a class="main-site-link" href="https://geb.ge/" aria-label="Go to the GEB main site">WWW.GEB.GE <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
     </header>
 
     <main class="studio">
@@ -70,9 +70,9 @@
           </div>
           <div class="utility-controls">
             <button id="shuffleButton" class="utility-button" type="button" aria-pressed="false" title="Shuffle (S)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3h4v4M3 7h2.5c4.3 0 8.7 10 13 10H21m-4 4h4v-4M3 17h2.5c1.3 0 2.6-1.2 3.9-2.7M14.6 9.7C16 8.2 17.3 7 18.5 7H21"/></svg><span>SHUFFLE</span></button>
-            <button id="repeatButton" class="utility-button" type="button" data-mode="off" title="Repeat: off (R)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m17 2 4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4m14-1v2a3 3 0 0 1-3 3H3"/></svg><span id="repeatLabel">REPEAT OFF</span></button>
+            <button id="repeatButton" class="utility-button" type="button" data-mode="off" aria-pressed="false" title="Repeat: off (R)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m17 2 4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4m14-1v2a3 3 0 0 1-3 3H3"/></svg><span id="repeatLabel">REPEAT OFF</span></button>
             <button id="speedButton" class="speed-button" type="button" title="Playback speed">1.0×</button>
-            <div class="volume-control"><button id="muteButton" class="icon-button volume-button" type="button" aria-label="Mute" title="Mute (M)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path class="volume-wave" d="M16 9a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/></svg></button><input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"></div>
+            <div class="volume-control"><button id="muteButton" class="icon-button volume-button" type="button" aria-label="Mute" aria-pressed="false" title="Mute (M)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path class="volume-wave" d="M16 9a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/><path class="volume-mute-slash" d="m16 9 5 6m0-6-5 6"/></svg></button><input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"></div>
           </div>
         </div>
         <audio id="audioPlayer" preload="none"></audio>
