@@ -507,7 +507,12 @@ button,input {
 }
 
 .transport-button.category-skip svg {
-  width:17px
+  width:16px;
+  transform:translateY(-3px)
+}
+
+.transport-button.category-skip {
+  width:42px
 }
 
 .transport-button span {
@@ -515,7 +520,7 @@ button,input {
   right:2px;
   bottom:1px;
   color:#829096;
-  font:6px 'DM Mono',monospace
+  font:8px 'DM Mono',monospace
 }
 
 .play-button {
@@ -564,7 +569,7 @@ button,input {
   border-radius:3px;
   background:linear-gradient(#ecefee,#cbd2d2);
   color:#758188;
-  font:7px 'DM Mono',monospace;
+  font:9px 'DM Mono',monospace;
   letter-spacing:.04em;
   box-shadow:inset 1px 1px #fff;
   cursor:pointer
@@ -1268,7 +1273,7 @@ html,body {
 @media(max-width:380px) {
   .utility-button {
     padding:0 4px;
-    font-size:6px
+    font-size:8px
   }
 
   .volume-slider {
@@ -1432,7 +1437,7 @@ button,.category-tab,.utility-button,.speed-button,.transport-button {
 }
 
 .category-tab {
-  font-size:9px;
+  font-size:11px;
   font-weight:700;
   color:#62727b
 }
@@ -1449,15 +1454,19 @@ button,.category-tab,.utility-button,.speed-button,.transport-button {
 
 @media(max-width:600px) {
   .utility-button {
-    font-size:8px
+    font-size:11px
   }
 
   .category-tab {
-    font-size:8px
+    font-size:11px
   }
 
   .transport-button {
-    font-size:10px
+    font-size:11px
+  }
+
+  .transport-button span {
+    font-size:9px
   }
 }
 
