@@ -709,7 +709,16 @@ button,input {
   letter-spacing:.1em
 }
 
+.category-navigation {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0
+}
+
 .category-tabs {
+  flex:1 1 auto;
+  min-width:0;
   display:flex;
   gap:5px;
   overflow-x:auto;
@@ -739,6 +748,43 @@ button,input {
   color:#4d7770;
   background:linear-gradient(#e8f1df,#c8dbb8);
   border-color:#9eb29e
+}
+
+.favorites-tab {
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  white-space:nowrap
+}
+
+.favorites-tab svg {
+  width:13px;
+  height:13px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+
+.favorites-tab.active {
+  color:#9d6572;
+  border-color:#c69ca2;
+  background:linear-gradient(#f8eeee,#ead3d5)
+}
+
+.favorites-tab.active svg {
+  fill:#ce788822
+}
+
+.favorite-count {
+  min-width:15px;
+  padding:1px 4px;
+  border-radius:999px;
+  background:#ffffff80;
+  text-align:center;
+  font-size:.9em
 }
 
 .search-field {

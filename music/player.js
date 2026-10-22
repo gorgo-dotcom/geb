@@ -6,7 +6,7 @@
   // Current layout: music/mp3/<category>/<file>.mp3
   const MUSIC_BASE_URL = './mp3/';
   const audio = $('audioPlayer');
-  const state = { categories: [], category: 0, track: null, shuffle: false, repeat: 'off', history: [], favorites: new Set(), context: null, analyser: null, source: null, raf: 0, speed: 1 };
+  const state = { categories: [], category: 0, track: null, showFavorites: false, shuffle: false, repeat: 'off', history: [], favorites: new Set(), context: null, analyser: null, source: null, raf: 0, speed: 1 };
   const favoritesKey = 'geb-audio-favorites-v1';
   const savedVolumeSetting = localStorage.getItem('geb-audio-volume');
   const savedVolume = savedVolumeSetting === null ? 0.8 : Number(savedVolumeSetting);
@@ -31,30 +31,41 @@
     container.replaceChildren();
     state.categories.forEach((category, index) => {
       const button = document.createElement('button');
-      button.type = 'button'; button.className = `category-tab${index === state.category ? ' active' : ''}`;
-      button.setAttribute('role', 'tab'); button.setAttribute('aria-selected', String(index === state.category));
+      button.type = 'button'; button.className = `category-tab${!state.showFavorites && index === state.category ? ' active' : ''}`;
+      button.setAttribute('role', 'tab'); button.setAttribute('aria-selected', String(!state.showFavorites && index === state.category));
       button.textContent = `${category.label} · ${category.tracks.length}`;
-      button.addEventListener('click', () => { state.category = index; state.track = category.tracks.length ? 0 : null; state.history = []; $('trackSearch').value = ''; renderCategories(); renderTracks(); if (state.track !== null) loadAndPlay(); else updateTrackInfo(); });
+      button.addEventListener('click', () => { state.showFavorites = false; state.category = index; state.track = category.tracks.length ? 0 : null; state.history = []; $('trackSearch').value = ''; renderCategories(); renderTracks(); if (state.track !== null) loadAndPlay(); else updateTrackInfo(); });
       container.append(button);
     });
+    $('favoritesTab').classList.toggle('active', state.showFavorites);
+    $('favoritesTab').setAttribute('aria-pressed', String(state.showFavorites));
+    $('favoriteCount').textContent = state.favorites.size;
   }
 
   function visibleTracks() {
     const query = $('trackSearch').value.trim().toLocaleLowerCase();
-    return currentCategory().tracks.map((track, index) => ({ track, index })).filter(({ track }) => !query || fileTitle(track).toLocaleLowerCase().includes(query));
+    const tracks = state.showFavorites
+      ? allTracks().filter((track) => state.favorites.has(track.path)).map((track) => ({ track, index: track.trackIndex, categoryIndex: track.categoryIndex }))
+      : currentCategory().tracks.map((track, index) => ({ track, index, categoryIndex: state.category }));
+    return tracks.filter(({ track }) => !query || fileTitle(track).toLocaleLowerCase().includes(query));
   }
 
   function renderTracks() {
     const list = $('trackList'); list.replaceChildren();
-    const category = currentCategory(); const items = visibleTracks();
-    $('playlistTitle').textContent = category.label.toLocaleUpperCase();
+    const items = visibleTracks();
+    $('playlistTitle').textContent = state.showFavorites ? 'FAVORITES' : currentCategory().label.toLocaleUpperCase();
     $('playlistCount').textContent = `${items.length} TRACK${items.length === 1 ? '' : 'S'}`;
     $('clearSearch').hidden = !$('trackSearch').value;
     $('emptyState').hidden = items.length !== 0;
-    items.forEach(({ track, index }) => {
-      const row = document.createElement('button'); row.type = 'button'; row.className = `track-row${index === state.track ? ' active' : ''}${index === state.track && !audio.paused ? ' is-playing' : ''}`;
-      row.setAttribute('role', 'listitem'); row.setAttribute('aria-current', index === state.track ? 'true' : 'false');
-      const number = document.createElement('span'); number.className = 'track-index'; number.textContent = String(index + 1).padStart(2, '0');
+    const query = $('trackSearch').value.trim();
+    $('emptyState').querySelector('strong').textContent = state.showFavorites ? (query ? 'No matching favorites' : 'No favorites yet') : 'No tracks found';
+    $('emptyState').lastElementChild.textContent = state.showFavorites && !query ? 'Tap the heart on a track to save it here.' : 'Try another title or clear your search.';
+    items.forEach(({ track, index, categoryIndex }, visibleIndex) => {
+      const category = state.categories[categoryIndex];
+      const isCurrent = categoryIndex === state.category && index === state.track;
+      const row = document.createElement('button'); row.type = 'button'; row.className = `track-row${isCurrent ? ' active' : ''}${isCurrent && !audio.paused ? ' is-playing' : ''}`;
+      row.setAttribute('role', 'listitem'); row.setAttribute('aria-current', String(isCurrent));
+      const number = document.createElement('span'); number.className = 'track-index'; number.textContent = String(state.showFavorites ? visibleIndex + 1 : index + 1).padStart(2, '0');
       const playing = document.createElement('span'); playing.className = 'track-playing'; playing.textContent = '♫';
       const thumb = document.createElement('img'); thumb.className = 'track-thumb'; thumb.alt = ''; thumb.loading = 'lazy';
       thumb.src = `${new URL(safePath(track.thumbnail || category.thumbnail || track.artwork || category.artwork), document.baseURI).href}?v=thumb2`;
@@ -64,7 +75,7 @@
       const categoryLine = document.createElement('span'); categoryLine.className = 'track-category'; categoryLine.textContent = category.label;
       const duration = document.createElement('span'); duration.className = 'track-duration'; duration.textContent = index === state.track ? formatTime(audio.duration) : 'MP3';
       copy.append(title, categoryLine); row.append(number, playing, thumb, copy, duration);
-      row.addEventListener('click', () => { state.track = index; loadAndPlay(); }); list.append(row);
+      row.addEventListener('click', () => { state.category = categoryIndex; state.track = index; renderCategories(); loadAndPlay(); }); list.append(row);
     });
     $('trackCount').textContent = allTracks().length;
     $('footerTrackCount').textContent = allTracks().length;
@@ -164,7 +175,8 @@
   $('seekBar').addEventListener('input', () => { if (Number.isFinite(audio.duration)) audio.currentTime = audio.duration * Number($('seekBar').value) / 1000; });
   $('volumeSlider').addEventListener('input', () => { audio.volume = Number($('volumeSlider').value); audio.muted = false; localStorage.setItem('geb-audio-volume', audio.volume); $('muteButton').setAttribute('aria-label', 'Mute'); });
   $('muteButton').addEventListener('click', () => { audio.muted = !audio.muted; $('muteButton').classList.toggle('active', audio.muted); $('muteButton').setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute'); });
-  $('favoriteButton').addEventListener('click', () => { const track = currentTrack(); if (!track) return; if (state.favorites.has(track.path)) state.favorites.delete(track.path); else state.favorites.add(track.path); localStorage.setItem(favoritesKey, JSON.stringify([...state.favorites])); updateTrackInfo(); });
+  $('favoriteButton').addEventListener('click', () => { const track = currentTrack(); if (!track) return; if (state.favorites.has(track.path)) state.favorites.delete(track.path); else state.favorites.add(track.path); localStorage.setItem(favoritesKey, JSON.stringify([...state.favorites])); updateTrackInfo(); renderCategories(); renderTracks(); });
+  $('favoritesTab').addEventListener('click', () => { state.showFavorites = !state.showFavorites; $('trackSearch').value = ''; renderCategories(); renderTracks(); });
   $('trackSearch').addEventListener('input', renderTracks);
   $('clearSearch').addEventListener('click', () => { $('trackSearch').value = ''; renderTracks(); $('trackSearch').focus(); });
   audio.addEventListener('play', () => setPlaying(true)); audio.addEventListener('pause', () => setPlaying(false));
@@ -194,6 +206,9 @@
   libraryRequest.then((library) => {
     state.categories = library.categories || [];
     state.favorites = new Set(JSON.parse(localStorage.getItem(favoritesKey) || '[]'));
+    const availableFavorites = new Set(allTracks().map((track) => track.path));
+    state.favorites = new Set([...state.favorites].filter((path) => availableFavorites.has(path)));
+    localStorage.setItem(favoritesKey, JSON.stringify([...state.favorites]));
     $('libraryStatus').textContent = `${allTracks().length} TRACKS READY`;
     if (!state.categories.length) throw new Error('The library has no categories.');
     state.category = Math.max(0, state.categories.findIndex((category) => category.tracks.length)); state.track = state.categories[state.category].tracks.length ? 0 : null;
