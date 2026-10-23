@@ -107,26 +107,7 @@
       "id": "Techno-Trance",
       "label": "Techno / Trance",
       "artwork": "arts/techno.gif",
-      "tracks": [
-        {
-          "title": "0-MISS MON - Radio Intense 31.01.2017",
-          "path": "Techno-Trance/0-MISS MON - Radio Intense 31.01.2017.mp3",
-          "artwork": "arts/tracks/Techno-Trance-004-raster.gif",
-          "thumbnail": "arts/thumbnails/Techno-Trance-004-raster.jpg"
-        },
-        {
-          "title": "ARTBAT - Best Mix 2023 (CamelPhat - Monolink - David Guetta - Innellea, remixes) Mixed by KOCCIN",
-          "path": "Techno-Trance/ARTBAT - Best Mix 2023 (CamelPhat - Monolink - David Guetta - Innellea, remixes) Mixed by KOCCIN.mp3",
-          "artwork": "arts/tracks/Techno-Trance-008.gif",
-          "thumbnail": "arts/thumbnails/Techno-Trance-008.jpg"
-        },
-        {
-          "title": "Omiki-2026-Indian Spirit Festival 2026",
-          "path": "Techno-Trance/Omiki-2026-Indian Spirit Festival 2026.mp3",
-          "artwork": "arts/tracks/Techno-Trance-010.gif",
-          "thumbnail": "arts/thumbnails/Techno-Trance-010.jpg"
-        }
-      ]
+      "tracks": []
     },
     {
       "id": "Relax-Ambient-Chill-WorkMusic",
@@ -134,16 +115,10 @@
       "artwork": "arts/ambient.gif",
       "tracks": [
         {
-          "title": "0-CarbonBasedLiveforms-Bests",
-          "path": "Relax-Ambient-Chill-WorkMusic/0-CarbonBasedLiveforms-Bests.mp3",
-          "artwork": "arts/tracks/Relax-Ambient-Chill-WorkMusic-001.gif",
-          "thumbnail": "arts/thumbnails/Relax-Ambient-Chill-WorkMusic-001.jpg"
-        },
-        {
-          "title": "0-Enigma - Best full album",
-          "path": "Relax-Ambient-Chill-WorkMusic/0-Enigma - Best full album.mp3",
-          "artwork": "arts/tracks/Relax-Ambient-Chill-WorkMusic-002.gif",
-          "thumbnail": "arts/thumbnails/Relax-Ambient-Chill-WorkMusic-002.jpg"
+          "title": "Carbon Based Lifeforms -MOS 6581",
+          "path": "Relax-Ambient-Chill-WorkMusic/Carbon Based Lifeforms -MOS 6581.mp3",
+          "artwork": "arts/tracks/Carbon Based Lifeforms -MOS 6581.gif",
+          "thumbnail": "arts/thumbnails/Carbon Based Lifeforms -MOS 6581.jpg"
         }
       ]
     },
