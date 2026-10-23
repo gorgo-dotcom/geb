@@ -66,8 +66,45 @@ background: linear-gradient(135deg, #2563eb, #10b981);
 -webkit-background-clip: text; 
 -webkit-text-fill-color: transparent; 
 }
+.header-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+.header-brand-row .logo {
+    white-space: nowrap;
+}
+.header-service-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(232,245,239,.92));
+    box-shadow: 0 3px 9px rgba(37, 99, 235, .10), inset 0 1px rgba(255,255,255,.9);
+    color: #376e76;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.header-service-icon:hover {
+    transform: translateY(-1px);
+    border-color: rgba(16, 185, 129, .6);
+    box-shadow: 0 5px 13px rgba(37, 99, 235, .15), inset 0 1px rgba(255,255,255,.9);
+}
+.header-service-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 .tabs-wrapper { 
 display: flex; 
+justify-content: center;
 background: transparent; 
 padding: 5px; 
 border-radius: 30px; 
@@ -83,10 +120,11 @@ scrollbar-width: none;
 display: none;
 }
 .menu-controls {
-    width: 100%;
+    width: 95%;
     padding: 3px 12px 9px;
     border-radius: 18px;
-    background: rgba(241, 245, 249, 0.82);
+    background: rgba(229, 236, 245, 0.94);
+    border: 1px solid #bac7d8;
 }
 .post-search {
     display: flex;
@@ -147,14 +185,15 @@ display: none;
 .tab-btn { 
 border: none; 
 background: transparent; 
-padding: 8px 16px; 
+padding: 8px 10px; 
 border-radius: 20px; 
 font-weight: 600; 
-font-size: 0.85rem; 
+font-size: 0.82rem; 
 color: #64748b; 
 cursor: pointer; 
 transition: all 0.25s; 
-flex-shrink: 0;
+flex: 0 1 auto;
+min-width: 0;
 }
 .tab-btn.active { 
 background: #ffffff; 
@@ -368,7 +407,21 @@ opacity: 0.55;
         background-position: center center;
         background-size: cover;
     }
+    .tabs-wrapper {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+    .tab-btn {
+        flex: 0 0 auto;
+    }
     .image-viewer { padding: 16px; }
     .image-viewer-frame { max-width: 98vw; padding: 7px; border-radius: 14px; }
     .image-viewer-image { max-width: calc(98vw - 46px); max-height: calc(92vh - 50px); }
+}
+@media (max-width: 380px) {
+    .header-brand-row { gap: 15px; }
+    .header-brand-row .logo { gap: 5px; font-size: .95rem; }
+    .header-service-icon { width: 30px; height: 30px; }
 }

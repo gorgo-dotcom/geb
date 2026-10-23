@@ -36,10 +36,23 @@ async function plk(postID, clientID, liked) {
 document.addEventListener("DOMContentLoaded", () => {
   const postsFeed = document.getElementById("postsFeed");
   const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabsWrapper = document.querySelector(".tabs-wrapper");
   const postSearchInput = document.getElementById("postSearchInput");
   const postSearchClear = document.getElementById("postSearchClear");
   const readingProgress = document.querySelector(".reading-progress");
   const readingProgressFill = readingProgress.querySelector(".reading-progress-fill");
+
+  tabsWrapper.addEventListener("wheel", (event) => {
+    if (tabsWrapper.scrollWidth <= tabsWrapper.clientWidth) return;
+
+    const wheelDistance = Math.abs(event.deltaY) > Math.abs(event.deltaX)
+      ? event.deltaY
+      : event.deltaX;
+    if (!wheelDistance) return;
+
+    event.preventDefault();
+    tabsWrapper.scrollLeft += wheelDistance;
+  }, { passive: false });
 
   const imageViewer = document.createElement("div");
   imageViewer.className = "image-viewer";
