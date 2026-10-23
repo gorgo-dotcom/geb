@@ -22,7 +22,7 @@ body {
   min-height:100vh;
   color:var(--ink);
   font-family:'DM Mono',Consolas,monospace;
-  background:radial-gradient(ellipse at 18% 8%,#e5eef0 0,transparent 42%),radial-gradient(ellipse at 86% 76%,#e8e7ed 0,transparent 42%),#e6e9e7
+  background:#fff
 }
 
 button,input {
@@ -673,7 +673,9 @@ button,input {
   display:flex;
   flex-direction:column;
   padding:12px;
-  border-radius:5px
+  border-radius:5px;
+  border-color:#9eafb3;
+  background:linear-gradient(145deg,#e2edef,#c2d5d8 48%,#d6e5e3)
 }
 
 .library-heading {
