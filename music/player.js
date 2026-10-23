@@ -81,7 +81,7 @@
       const number = document.createElement('span'); number.className = 'track-index'; number.textContent = String(state.showFavorites ? visibleIndex + 1 : index + 1).padStart(2, '0');
       const playing = document.createElement('span'); playing.className = 'track-playing'; playing.textContent = '♫';
       const thumb = document.createElement('img'); thumb.className = 'track-thumb'; thumb.alt = ''; thumb.loading = 'lazy';
-      thumb.src = `${new URL(safePath(track.thumbnail || category.thumbnail || track.artwork || category.artwork), document.baseURI).href}?v=thumb2`;
+      thumb.src = `${new URL(safePath(track.thumbnail || category.thumbnail || track.artwork || category.artwork), document.baseURI).href}?v=track-art-from-mp3-20261023`;
       thumb.addEventListener('error', () => { thumb.hidden = true; }, { once: true });
       const copy = document.createElement('span'); copy.className = 'track-copy';
       const title = document.createElement('span'); title.className = 'track-name'; title.textContent = fileTitle(track);
@@ -98,7 +98,7 @@
     const category = currentCategory(); const track = currentTrack();
     $('artCategory').textContent = category?.label.toLocaleUpperCase() || 'GEB AUDIO';
     $('artMood').textContent = category?.label.toLocaleUpperCase() || 'A LITTLE SPACE TO LISTEN';
-    $('coverArt').src = track?.artwork ? `${new URL(safePath(track.artwork), document.baseURI).href}?v=mobile-readability1` : (category?.artwork || 'arts/ambient.svg');
+    $('coverArt').src = track?.artwork ? `${new URL(safePath(track.artwork), document.baseURI).href}?v=track-art-from-mp3-20261023` : (category?.artwork || 'arts/ambient.svg');
     $('coverArt').alt = track ? `${fileTitle(track)} cover art` : `${category?.label || 'GEB'} category artwork`;
     const artworkPath = track?.artwork?.split('?')[0].toLowerCase() || '';
     $('artworkStage').classList.toggle('has-animated-art', artworkPath.endsWith('.gif'));
@@ -210,7 +210,7 @@
   }
 
   const embeddedLibrary = $('musicLibrary')?.textContent.trim();
-  const libraryRequest = fetch('./library.json', { cache: 'no-cache' })
+  const libraryRequest = fetch('./library.json?v=track-art-from-mp3-20261023', { cache: 'no-cache' })
     .then((response) => { if (!response.ok) throw new Error(`Library request failed: ${response.status}`); return response.json(); })
     .catch((error) => {
       if (embeddedLibrary) return JSON.parse(embeddedLibrary);

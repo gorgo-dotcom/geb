@@ -1,6 +1,109 @@
 {
   "categories": [
     {
+      "id": "90s",
+      "label": "90s",
+      "artwork": "arts/tracks/90s.gif",
+      "tracks": [
+        {
+          "title": "2 UNLIMITED - No One (Official Music Video)",
+          "path": "90s/2 UNLIMITED - No One.mp3",
+          "artwork": "arts/tracks/2 UNLIMITED - No One.gif",
+          "thumbnail": "arts/thumbnails/2 UNLIMITED - No One (Official Music Video).jpg"
+        },
+        {
+          "title": "Bow Wow (That's My Name)",
+          "path": "90s/Bow Wow-That's My Name.mp3",
+          "artwork": "arts/tracks/Bow Wow-That's My Name.gif",
+          "thumbnail": "arts/thumbnails/Bow Wow (That's My Name).jpg"
+        },
+        {
+          "title": "California Love",
+          "path": "90s/California Love.mp3",
+          "artwork": "arts/tracks/California Love.gif",
+          "thumbnail": "arts/thumbnails/California Love.jpg"
+        },
+        {
+          "title": "Dr. Alban - Look Who's Talking (JTV 2023 Remix)",
+          "path": "90s/Dr. Alban - Look Who's Talking-JTV 2023 Remix.mp3",
+          "artwork": "arts/tracks/Dr. Alban - Look Who's Talking-JTV 2023 Remix.gif",
+          "thumbnail": "arts/thumbnails/Dr. Alban - Look Who's Talking (JTV 2023 Remix).jpg"
+        },
+        {
+          "title": "Dr.Alban - Look Who's Talking",
+          "path": "90s/Dr.Alban - Look Who's Talking.mp3",
+          "artwork": "arts/tracks/Dr.Alban - Look Who's Talking.gif",
+          "thumbnail": "arts/thumbnails/Dr.Alban - Look Who's Talking.jpg"
+        },
+        {
+          "title": "Faithless - Insomnia ",
+          "path": "90s/Faithless - Insomnia .mp3",
+          "artwork": "arts/tracks/Faithless - Insomnia.gif",
+          "thumbnail": "arts/thumbnails/Faithless - Insomnia.jpg"
+        },
+        {
+          "title": "Haddaway - What Is Love [Official 4K]",
+          "path": "90s/Haddaway - What Is Love.mp3",
+          "artwork": "arts/tracks/Haddaway - What Is Love.gif",
+          "thumbnail": "arts/thumbnails/Haddaway - What Is Love.jpg"
+        },
+        {
+          "title": "It Feels So Good",
+          "path": "90s/It Feels So Good.mp3",
+          "artwork": "arts/tracks/It Feels So Good.gif",
+          "thumbnail": "arts/thumbnails/It Feels So Good.jpg"
+        },
+        {
+          "title": "LL COOL J - Doin' It (Official Music Video)",
+          "path": "90s/LL COOL J - Doin' It.mp3",
+          "artwork": "arts/tracks/LL COOL J - Doin' It.gif",
+          "thumbnail": "arts/thumbnails/LL COOL J - Doin' It.jpg"
+        },
+        {
+          "title": "Londonbeat - I've Been Thinking About You (Video)",
+          "path": "90s/Londonbeat - I've Been Thinking About You.mp3",
+          "artwork": "arts/tracks/Londonbeat - I've Been Thinking About You.gif",
+          "thumbnail": "arts/thumbnails/Londonbeat - I've Been Thinking About You.jpg"
+        },
+        {
+          "title": "Mr.President - Coco Jamboo (1996) [Official Video]",
+          "path": "90s/Mr.President - Coco Jamboo.mp3",
+          "artwork": "arts/tracks/Mr.President - Coco Jamboo.gif",
+          "thumbnail": "arts/thumbnails/Mr.President - Coco Jamboo.jpg"
+        },
+        {
+          "title": "Prodigy - Mindfields",
+          "path": "90s/Prodigy - Mindfields.mp3",
+          "artwork": "arts/tracks/Prodigy - Mindfields.gif",
+          "thumbnail": "arts/thumbnails/Prodigy - Mindfields.jpg"
+        },
+        {
+          "title": "Sky (Radio Edit)",
+          "path": "90s/Sky.mp3",
+          "artwork": "arts/tracks/Sky.gif",
+          "thumbnail": "arts/thumbnails/Sky.jpg"
+        },
+        {
+          "title": "Snap-PowerRemix2024",
+          "path": "90s/Snap-PowerRemix2024.mp3",
+          "artwork": "arts/tracks/Snap-PowerRemix2024.gif",
+          "thumbnail": "arts/thumbnails/Snap-PowerRemix2024.jpg"
+        },
+        {
+          "title": "Suzanne Vega, DNA - Tom's Diner",
+          "path": "90s/Suzanne Vega, DNA - Tom's Diner.mp3",
+          "artwork": "arts/tracks/Suzanne Vega, DNA - Tom's Diner.gif",
+          "thumbnail": "arts/thumbnails/Suzanne Vega, DNA - Tom's Diner.jpg"
+        },
+        {
+          "title": "Urban Cookie Collective - The Key, The Secret (Official HD Music Video)",
+          "path": "90s/Urban Cookie Collective - The Key, The Secret.mp3",
+          "artwork": "arts/tracks/Urban Cookie Collective - The Key, The Secret.gif",
+          "thumbnail": "arts/thumbnails/Urban Cookie Collective - The Key, The Secret.jpg"
+        }
+      ]
+    },
+    {
       "id": "Techno-Trance",
       "label": "Techno / Trance",
       "artwork": "arts/techno.gif",
