@@ -104,6 +104,146 @@
       ]
     },
     {
+      "id": "Afro",
+      "label": "Afro",
+      "artwork": "arts/tracks/Afro - Let Me Breathe.gif",
+      "tracks": [
+        {
+          "title": "Afro - Let Me Breathe",
+          "path": "Afro/Afro - Let Me Breathe.mp3",
+          "artwork": "arts/tracks/Afro - Let Me Breathe.gif",
+          "thumbnail": "arts/thumbnails/Afro - Let Me Breathe.jpg"
+        },
+        {
+          "title": "Afro House Ritual  - Ancestral Journey",
+          "path": "Afro/Afro House Ritual  - Ancestral Journey.mp3",
+          "artwork": "arts/tracks/Afro House Ritual  - Ancestral Journey.gif",
+          "thumbnail": "arts/thumbnails/Afro House Ritual  - Ancestral Journey.jpg"
+        },
+        {
+          "title": "Afro-Sunrise",
+          "path": "Afro/Afro-Sunrise.mp3",
+          "artwork": "arts/tracks/Afro-Sunrise.gif",
+          "thumbnail": "arts/thumbnails/Afro-Sunrise.jpg"
+        },
+        {
+          "title": "ANNA RAY - Dance",
+          "path": "Afro/ANNA RAY - Dance.mp3",
+          "artwork": "arts/tracks/ANNA RAY - Dance.gif",
+          "thumbnail": "arts/thumbnails/ANNA RAY - Dance.jpg"
+        },
+        {
+          "title": "Baila Binti Melodic AfroHouse",
+          "path": "Afro/Baila Binti Melodic AfroHouse.mp3",
+          "artwork": "arts/tracks/Baila Binti Melodic AfroHouse.gif",
+          "thumbnail": "arts/thumbnails/Baila Binti Melodic AfroHouse.jpg"
+        },
+        {
+          "title": "Black Aura - Soul to Soul Deep & Melodic AfroHouse",
+          "path": "Afro/Black Aura - Soul to Soul Deep & Melodic AfroHouse.mp3",
+          "artwork": "arts/tracks/Black Aura - Soul to Soul Deep & Melodic AfroHouse.gif",
+          "thumbnail": "arts/thumbnails/Black Aura - Soul to Soul Deep & Melodic AfroHouse.jpg"
+        },
+        {
+          "title": "Carry me home",
+          "path": "Afro/Carry me home.mp3",
+          "artwork": "arts/tracks/Carry me home.gif",
+          "thumbnail": "arts/thumbnails/Carry me home.jpg"
+        },
+        {
+          "title": "Charlie-MOOD",
+          "path": "Afro/Charlie-MOOD.mp3",
+          "artwork": "arts/tracks/Charlie-MOOD.gif",
+          "thumbnail": "arts/thumbnails/Charlie-MOOD.jpg"
+        },
+        {
+          "title": "CLOSE ENOUGH ",
+          "path": "Afro/CLOSE ENOUGH .mp3",
+          "artwork": "arts/tracks/CLOSE ENOUGH .gif",
+          "thumbnail": "arts/thumbnails/CLOSE ENOUGH .jpg"
+        },
+        {
+          "title": "Deep Organic Afro House Soul Echo",
+          "path": "Afro/Deep Organic Afro House Soul Echo.mp3",
+          "artwork": "arts/tracks/Deep Organic Afro House Soul Echo.gif",
+          "thumbnail": "arts/thumbnails/Deep Organic Afro House Soul Echo.jpg"
+        },
+        {
+          "title": "Deeper",
+          "path": "Afro/Deeper.mp3",
+          "artwork": "arts/tracks/Deeper.gif",
+          "thumbnail": "arts/thumbnails/Deeper.jpg"
+        },
+        {
+          "title": "Dj Goja - Mi Chico ",
+          "path": "Afro/Dj Goja - Mi Chico .mp3",
+          "artwork": "arts/tracks/Dj Goja - Mi Chico .gif",
+          "thumbnail": "arts/thumbnails/Dj Goja - Mi Chico .jpg"
+        },
+        {
+          "title": "Eclipse -Melodic Afro House",
+          "path": "Afro/Eclipse -Melodic Afro House.mp3",
+          "artwork": "arts/tracks/Eclipse -Melodic Afro House.gif",
+          "thumbnail": "arts/thumbnails/Eclipse -Melodic Afro House.jpg"
+        },
+        {
+          "title": "I Let You Go",
+          "path": "Afro/I Let You Go.mp3",
+          "artwork": "arts/tracks/I Let You Go.gif",
+          "thumbnail": "arts/thumbnails/I Let You Go.jpg"
+        },
+        {
+          "title": "LET ME BE-2026",
+          "path": "Afro/LET ME BE-2026.mp3",
+          "artwork": "arts/tracks/LET ME BE-2026.gif",
+          "thumbnail": "arts/thumbnails/LET ME BE-2026.jpg"
+        },
+        {
+          "title": "Moyo Milele",
+          "path": "Afro/Moyo Milele.mp3",
+          "artwork": "arts/tracks/Moyo Milele.gif",
+          "thumbnail": "arts/thumbnails/Moyo Milele.jpg"
+        },
+        {
+          "title": "PULSE-AFRO SOUL",
+          "path": "Afro/PULSE-AFRO SOUL.mp3",
+          "artwork": "arts/tracks/PULSE-AFRO SOUL.gif",
+          "thumbnail": "arts/thumbnails/PULSE-AFRO SOUL.jpg"
+        },
+        {
+          "title": "XRISTXAN BodytoBody Afrohouse 2026",
+          "path": "Afro/XRISTXAN BodytoBody Afrohouse 2026.mp3",
+          "artwork": "arts/tracks/XRISTXAN BodytoBody Afrohouse 2026.gif",
+          "thumbnail": "arts/thumbnails/XRISTXAN BodytoBody Afrohouse 2026.jpg"
+        },
+        {
+          "title": "XRISTXAN Suma Afrohouse 2026",
+          "path": "Afro/XRISTXAN Suma Afrohouse 2026.mp3",
+          "artwork": "arts/tracks/XRISTXAN Suma Afrohouse 2026.gif",
+          "thumbnail": "arts/thumbnails/XRISTXAN Suma Afrohouse 2026.jpg"
+        },
+        {
+          "title": "Yali Yali - Afro House Ritual NOCTURNA by brisaFunk",
+          "path": "Afro/Yali Yali - Afro House Ritual NOCTURNA by brisaFunk.mp3",
+          "artwork": "arts/tracks/Yali Yali - Afro House Ritual NOCTURNA by brisaFunk.gif",
+          "thumbnail": "arts/thumbnails/Yali Yali - Afro House Ritual NOCTURNA by brisaFunk.jpg"
+        },
+        {
+          "title": "Zade - Cigarette",
+          "path": "Afro/Zade - Cigarette.mp3",
+          "artwork": "arts/tracks/Zade - Cigarette.gif",
+          "thumbnail": "arts/thumbnails/Zade - Cigarette.jpg"
+        },
+        {
+          "title": "ZAMBARA - Melancholia",
+          "path": "Afro/ZAMBARA - Melancholia.mp3",
+          "artwork": "arts/tracks/ZAMBARA - Melancholia.gif",
+          "thumbnail": "arts/thumbnails/ZAMBARA - Melancholia.jpg"
+        }
+      ],
+      "hint": "Afro soul / Afro house"
+    },
+    {
       "id": "Techno-Trance",
       "label": "Techno / Trance",
       "artwork": "arts/techno.gif",

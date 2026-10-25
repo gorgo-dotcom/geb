@@ -269,6 +269,7 @@ button,input {
 .artwork-stage {
   position:relative;
   isolation:isolate;
+  cursor:pointer;
   width:100%;
   aspect-ratio:1.55;
   overflow:hidden;

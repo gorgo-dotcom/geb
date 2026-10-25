@@ -44,7 +44,7 @@
       button.type = 'button'; button.className = `category-tab${!state.showFavorites && index === state.category ? ' active' : ''}`;
       button.setAttribute('role', 'tab'); button.setAttribute('aria-selected', String(!state.showFavorites && index === state.category));
       const shortLabel = category.id === 'Techno-Trance' ? 'Techno' : category.id === 'Relax-Ambient-Chill-WorkMusic' ? 'Chill' : category.label;
-      const hintLabel = category.id === 'Techno-Trance' ? 'Techno / Trance' : category.id === 'Relax-Ambient-Chill-WorkMusic' ? 'Ambient / Downtempo / Relax / Working music' : category.label;
+      const hintLabel = category.hint || (category.id === 'Techno-Trance' ? 'Techno / Trance' : category.id === 'Relax-Ambient-Chill-WorkMusic' ? 'Ambient / Downtempo / Relax / Working music' : category.label);
       button.textContent = `${shortLabel} · ${category.tracks.length}`;
       button.title = hintLabel;
       button.addEventListener('click', () => { state.showFavorites = false; state.category = index; state.track = category.tracks.length ? 0 : null; state.history = []; $('trackSearch').value = ''; renderCategories(); renderTracks(); if (state.track !== null) loadAndPlay(); else updateTrackInfo(); });
@@ -124,6 +124,7 @@
     $('playPause').setAttribute('aria-label', playing ? 'Pause' : 'Play');
     $('playStateLabel').textContent = playing ? 'PLAYING' : (currentTrack() ? 'PAUSED' : 'STANDBY');
     $('artworkStage').classList.toggle('is-playing', playing);
+    $('artworkStage').setAttribute('aria-label', playing ? 'Pause audio' : 'Resume audio');
     $('playerMessage').textContent = playing ? 'Now playing' : 'Playback paused';
     renderTracks(); updateMediaSession();
     if (playing) startVisualizer(); else stopVisualizer();
@@ -178,6 +179,10 @@
   function stopVisualizer() { cancelAnimationFrame(state.raf); const canvas = $('visualizer'); const ctx = canvas.getContext('2d'); if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
   $('playPause').addEventListener('click', togglePlay);
+  $('artworkStage').addEventListener('click', togglePlay);
+  $('artworkStage').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); event.stopPropagation(); togglePlay(); }
+  });
   $('previousTrack').addEventListener('click', () => { if (audio.currentTime > 3) { audio.currentTime = 0; if (audio.paused) togglePlay(); } else nextTrack(-1); });
   $('nextTrack').addEventListener('click', () => nextTrack(1));
   $('previousCategory').addEventListener('click', () => changeCategory(-1));
